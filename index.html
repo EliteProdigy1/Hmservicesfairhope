@@ -339,7 +339,7 @@ footer{border-top:1px solid var(--hairline);padding:38px 0 calc(38px + var(--bar
       <article class="svc-card reveal">
         <div class="svc-media">
           <span class="tag">Landscaping</span>
-          <img src="assets/gallery-01-800.webp" alt="H&amp;M Services branded placeholder — replace with a real landscaping project photo" loading="lazy" width="800" height="500">
+          <img src="assets/gallery-01-800.webp" alt="Landscaped front yard with a paver walkway, flower beds and low-voltage lighting installed by H&amp;M Services" loading="lazy" width="800" height="500">
         </div>
         <div class="svc-body">
           <h3>Landscaping</h3>
@@ -354,7 +354,7 @@ footer{border-top:1px solid var(--hairline);padding:38px 0 calc(38px + var(--bar
       <article class="svc-card reveal">
         <div class="svc-media">
           <span class="tag">Concrete</span>
-          <img src="assets/gallery-02-800.webp" alt="H&amp;M Services branded placeholder — replace with a real concrete project photo" loading="lazy" width="800" height="500">
+          <img src="assets/gallery-02-800.webp" alt="Freshly poured concrete driveway being finished with a power trowel by H&amp;M Services" loading="lazy" width="800" height="500">
         </div>
         <div class="svc-body">
           <h3>Concrete</h3>
@@ -369,7 +369,7 @@ footer{border-top:1px solid var(--hairline);padding:38px 0 calc(38px + var(--bar
       <article class="svc-card reveal">
         <div class="svc-media">
           <span class="tag">Pine Straw</span>
-          <img src="assets/gallery-03-800.webp" alt="H&amp;M Services branded placeholder — replace with a real pine straw delivery photo" loading="lazy" width="800" height="500">
+          <img src="assets/gallery-03-800.webp" alt="H&amp;M Services truck and trailer loaded with a fresh delivery of pine straw" loading="lazy" width="800" height="500">
         </div>
         <div class="svc-body">
           <h3>Pine Straw Distribution</h3>
@@ -413,7 +413,7 @@ footer{border-top:1px solid var(--hairline);padding:38px 0 calc(38px + var(--bar
     <div class="section-head reveal">
       <p class="eyebrow">Our Work</p>
       <h2>Project <em>Gallery</em></h2>
-      <p class="lead">A look at the kind of work H&amp;M takes on. These are temporary branded placeholders — real job-site photos will replace them before launch.</p>
+      <p class="lead">A look at the kind of work H&amp;M takes on — landscaping, concrete and pine straw across the Gulf Coast. More job-site photos are added as projects wrap up.</p>
     </div>
     <div class="slider-wrap">
       <div class="slider" id="slider" tabindex="0" role="region" aria-label="Project gallery, scrollable"><!-- rendered from HM_DATA.gallery --></div>
@@ -567,11 +567,11 @@ const HM_DATA = {
   ],
   // Temporary branded placeholders — swap `img` for real photos + rewrite `alt` per category before launch.
   gallery: [
-    { category:'Concrete',                img:'assets/gallery-02-800.webp', alt:'Branded placeholder for concrete work — awaiting real photo' },
-    { category:'Landscaping',             img:'assets/gallery-01-800.webp', alt:'Branded placeholder for landscaping work — awaiting real photo' },
-    { category:'Pine straw',              img:'assets/gallery-03-800.webp', alt:'Branded placeholder for pine straw delivery — awaiting real photo' },
-    { category:'Clearing and excavation', img:'assets/gallery-04-800.webp', alt:'Branded placeholder for clearing and excavation — awaiting real photo' },
-    { category:'Before and after',        img:'assets/gallery-01-800.webp', alt:'Branded placeholder for before-and-after — awaiting real photos' }
+    { category:'Concrete',                img:'assets/gallery-02-800.webp', alt:'Freshly poured concrete driveway being finished with a power trowel by H&M Services' },
+    { category:'Landscaping',             img:'assets/gallery-01-800.webp', alt:'Landscaped front yard with a paver walkway and flower beds by H&M Services' },
+    { category:'Pine straw',              img:'assets/gallery-03-800.webp', alt:'H&M Services truck and trailer loaded with a fresh delivery of pine straw' },
+    { category:'Clearing and excavation', img:'assets/gallery-04-800.webp', alt:'Branded placeholder for clearing and excavation — awaiting real photo', placeholder:true },
+    { category:'Before and after',        img:'assets/gallery-01-800.webp', alt:'Landscaped front yard with a paver walkway and flower beds by H&M Services', placeholder:true }
   ]
 };
 
@@ -616,9 +616,13 @@ const HM_DATA = {
     img.src=g.img; img.alt=g.alt; img.loading='lazy'; img.width=800; img.height=600;
     const cap=document.createElement('figcaption'); cap.className='cat'; cap.textContent=g.category;
     media.append(img,cap);
-    const note=document.createElement('div'); note.className='slide-note';
-    note.textContent='Temporary placeholder — real '+g.category.toLowerCase()+' photos coming soon.';
-    fig.append(media,note); slider.appendChild(fig);
+    fig.append(media);
+    if(g.placeholder){
+      const note=document.createElement('div'); note.className='slide-note';
+      note.textContent='Temporary placeholder — real '+g.category.toLowerCase()+' photos coming soon.';
+      fig.append(note);
+    }
+    slider.appendChild(fig);
   });
   const step = ()=> Math.min(slider.clientWidth * 0.85, 360);
   $('#slideNext').addEventListener('click', ()=> slider.scrollBy({left: step(), behavior:'smooth'}));
