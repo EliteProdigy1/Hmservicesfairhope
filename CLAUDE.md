@@ -37,3 +37,12 @@ in the Netlify dashboard (Forms → hm-services-contact → notifications).
 Hero background lives at `assets/hero-768.webp`, `assets/hero-1200.webp`, and
 `assets/hero-1600.webp`, served responsively via `srcset` / `sizes="100vw"`
 in `index.html`. `og:image` / `twitter:image` point to `hero-1600.webp`.
+
+## Cache-busting when replacing an image in place
+
+`netlify.toml` caches `/assets/*` for 30 days (`max-age=2592000`). If you
+replace a photo but keep the **same filename**, returning visitors keep seeing
+the old cached image. So whenever you overwrite an existing asset (e.g.
+`gallery-01-800.webp`), **bump the `?v=N` query string** on every reference to
+it in `index.html` (service cards + the `HM_DATA.gallery` array). Brand-new
+filenames don't need it. Current version token: `?v=2`.
